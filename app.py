@@ -1,5 +1,6 @@
 import asyncio
-from flask import Flask, jsonify
+import json
+from flask import Flask, Response
 from flask_cors import CORS
 from playwright.async_api import async_playwright
 
@@ -85,12 +86,8 @@ async def get_ipo_data():
 
 @app.route("/")
 def home():
-    return "Hello! Go to /api/ipo to see the raw IPO JSON data."
-
-@app.route("/api/ipo")
-def ipo_api():
     data = asyncio.run(get_ipo_data())
-    return jsonify(data)
+    return Response(json.dumps(data, indent=2), mimetype="application/json")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
