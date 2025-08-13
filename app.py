@@ -9,7 +9,6 @@ CORS(app)
 
 SUBSCRIPTION_URL = "https://www.chittorgarh.com/report/ipo-subscription-status-live-bidding-data-bse-nse/21/?year=2025"
 ALLOTMENT_URL = "https://www.chittorgarh.com/report/ipo-allotment-status-check-date-process/23/"
-
 async def fetch_subscription_data(page):
     await page.goto(SUBSCRIPTION_URL, wait_until="load", timeout=15000)
     await page.wait_for_selector("#report_table tbody tr", timeout=15000)
